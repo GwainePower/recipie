@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Recipie',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
           color: Colors.grey[300],

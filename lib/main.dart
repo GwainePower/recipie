@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'presentation/screens/auth_screen.dart';
 import 'presentation/screens/home_screen.dart';
 
 void main() => runApp(const MyApp());

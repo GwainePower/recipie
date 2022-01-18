@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipie/constants/strings.dart';
+
+import '../../constants/strings.dart';
 
 import '../widgets/main_drawer.dart';
 
@@ -28,8 +29,10 @@ class HomeScreen extends StatelessWidget {
             ),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 20,
+                ),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -49,7 +52,7 @@ class HomeScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.15,
             ),
             Image.asset(
-              'assets/images/fridge.png',
+              fridgeImage,
               scale: 0.8,
               filterQuality: FilterQuality.high,
             ),

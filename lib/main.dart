@@ -15,12 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(
-          color: Colors.grey[300],
-          brightness: Brightness.light,
-          textTheme: Typography.material2018().black,
-          iconTheme: const IconThemeData(color: Colors.black87),
-          actionsIconTheme: const IconThemeData(color: Colors.black87),
+        appBarTheme: const AppBarTheme(
+          color: Color(0x00ffffff),
+          iconTheme: IconThemeData(color: Colors.black87),
+          actionsIconTheme: IconThemeData(color: Colors.black87),
           elevation: 0,
         ),
       ),

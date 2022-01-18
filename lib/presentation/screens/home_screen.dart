@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipie/constants/strings.dart';
 
 import '../widgets/main_drawer.dart';
 
@@ -17,10 +18,14 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       drawer: const MainDrawer(),
-      body: Center(
+      body: Container(
+        alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Divider(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 padding:
@@ -32,7 +37,13 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {},
-              child: const Text('Что у вас есть в холодильнике?'),
+              child: const Text(
+                'Что у вас есть в холодильнике?',
+                style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: montserratFont,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
@@ -40,6 +51,7 @@ class HomeScreen extends StatelessWidget {
             Image.asset(
               'assets/images/fridge.png',
               scale: 0.8,
+              filterQuality: FilterQuality.high,
             ),
           ],
         ),

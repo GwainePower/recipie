@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/strings.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class MainDrawer extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          fontFamily: 'Omniglot',
+          fontFamily: montserratFont,
           fontSize: 24,
         ),
       ),
@@ -30,15 +32,23 @@ class MainDrawer extends StatelessWidget {
           Container(
             height: mediaQuery.size.height * 0.15,
             width: double.infinity,
-            padding: const EdgeInsets.all(10),
-            alignment: Alignment.centerLeft,
-            color: appTheme.primaryColor,
-            child: Text(
-              'Меню',
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
+            alignment: Alignment.bottomLeft,
+            decoration: BoxDecoration(
+              color: appTheme.primaryColor,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+            child: const Text(
+              appTitle,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: appTheme.textTheme.headline6!.color,
+                fontFamily: yesteryearFont,
+                fontSize: 52,
+                color: Colors.white,
               ),
             ),
           ),
@@ -46,38 +56,33 @@ class MainDrawer extends StatelessWidget {
             height: mediaQuery.size.height * 0.1,
           ),
           const Divider(),
-          // buildListTile(
-          //   Icons.shopping_cart,
-          //   'Товарчики',
-          //   () {
-          //     Navigator.of(context).pushReplacementNamed('/');
-          //   },
-          // ),
+          buildListTile(
+            Icons.account_box_rounded,
+            accountMenuName,
+            () {},
+          ),
+          const Divider(),
+          buildListTile(
+            Icons.fastfood_rounded,
+            categoriesMenuName,
+            () {
+              // Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+          const Divider(),
+          buildListTile(
+            Icons.receipt_long_rounded,
+            yourRecipesMenuName,
+            () {},
+          ),
+          const Divider(),
+          buildListTile(
+            Icons.settings,
+            settingsMenuName,
+            () {},
+          ),
           // const Divider(),
-          // buildListTile(
-          //   Icons.payment,
-          //   'Заказики',
-          //   () {
-          //     Navigator.of(context)
-          //         .pushReplacementNamed(OrdersScreen.routeName);
-          //     // Navigator.of(context).pushReplacement(
-          //     //   CustomRoute(
-          //     //     builder: (ctx) => const OrdersScreen(),
-          //     //   ),
-          //     // );
-          //   },
-          // ),
-          // const Divider(),
-          // buildListTile(
-          //   Icons.edit,
-          //   'Редактор продуктиков',
-          //   () {
-          //     Navigator.of(context)
-          //         .pushReplacementNamed(UserProductsScreen.routeName);
-          //   },
-          // ),
-          // const Divider(),
-          // buildListTile(Icons.logout, 'Съебаться', () {
+          // buildListTile(Icons.logout, 'Выйти', () {
           //   Navigator.of(context).pop();
           //   Navigator.of(context).pushReplacementNamed('/');
           //   Provider.of<AuthProvider>(context, listen: false).logout();

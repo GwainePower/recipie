@@ -25,7 +25,7 @@ class _$RecipeTearOff {
   _Recipe call(
       {required String? id,
       String? userId,
-      required String categoryId,
+      required List<String> categoryIds,
       required String title,
       required int cookTime,
       required int kcal,
@@ -36,7 +36,7 @@ class _$RecipeTearOff {
     return _Recipe(
       id: id,
       userId: userId,
-      categoryId: categoryId,
+      categoryIds: categoryIds,
       title: title,
       cookTime: cookTime,
       kcal: kcal,
@@ -59,7 +59,7 @@ const $Recipe = _$RecipeTearOff();
 mixin _$Recipe {
   String? get id => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
-  String get categoryId => throw _privateConstructorUsedError;
+  List<String> get categoryIds => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get cookTime => throw _privateConstructorUsedError;
   int get kcal => throw _privateConstructorUsedError;
@@ -80,7 +80,7 @@ abstract class $RecipeCopyWith<$Res> {
   $Res call(
       {String? id,
       String? userId,
-      String categoryId,
+      List<String> categoryIds,
       String title,
       int cookTime,
       int kcal,
@@ -102,7 +102,7 @@ class _$RecipeCopyWithImpl<$Res> implements $RecipeCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? userId = freezed,
-    Object? categoryId = freezed,
+    Object? categoryIds = freezed,
     Object? title = freezed,
     Object? cookTime = freezed,
     Object? kcal = freezed,
@@ -120,10 +120,10 @@ class _$RecipeCopyWithImpl<$Res> implements $RecipeCopyWith<$Res> {
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: categoryId == freezed
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+      categoryIds: categoryIds == freezed
+          ? _value.categoryIds
+          : categoryIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ abstract class _$RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
   $Res call(
       {String? id,
       String? userId,
-      String categoryId,
+      List<String> categoryIds,
       String title,
       int cookTime,
       int kcal,
@@ -187,7 +187,7 @@ class __$RecipeCopyWithImpl<$Res> extends _$RecipeCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? userId = freezed,
-    Object? categoryId = freezed,
+    Object? categoryIds = freezed,
     Object? title = freezed,
     Object? cookTime = freezed,
     Object? kcal = freezed,
@@ -205,10 +205,10 @@ class __$RecipeCopyWithImpl<$Res> extends _$RecipeCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: categoryId == freezed
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+      categoryIds: categoryIds == freezed
+          ? _value.categoryIds
+          : categoryIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ class _$_Recipe extends _Recipe {
   const _$_Recipe(
       {required this.id,
       this.userId,
-      required this.categoryId,
+      required this.categoryIds,
       required this.title,
       required this.cookTime,
       required this.kcal,
@@ -265,7 +265,7 @@ class _$_Recipe extends _Recipe {
   @override
   final String? userId;
   @override
-  final String categoryId;
+  final List<String> categoryIds;
   @override
   final String title;
   @override
@@ -284,7 +284,7 @@ class _$_Recipe extends _Recipe {
 
   @override
   String toString() {
-    return 'Recipe(id: $id, userId: $userId, categoryId: $categoryId, title: $title, cookTime: $cookTime, kcal: $kcal, ingredients: $ingredients, steps: $steps, pictureUrl: $pictureUrl, isFavorite: $isFavorite)';
+    return 'Recipe(id: $id, userId: $userId, categoryIds: $categoryIds, title: $title, cookTime: $cookTime, kcal: $kcal, ingredients: $ingredients, steps: $steps, pictureUrl: $pictureUrl, isFavorite: $isFavorite)';
   }
 
   @override
@@ -295,7 +295,7 @@ class _$_Recipe extends _Recipe {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality()
-                .equals(other.categoryId, categoryId) &&
+                .equals(other.categoryIds, categoryIds) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.cookTime, cookTime) &&
             const DeepCollectionEquality().equals(other.kcal, kcal) &&
@@ -313,7 +313,7 @@ class _$_Recipe extends _Recipe {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(categoryId),
+      const DeepCollectionEquality().hash(categoryIds),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(cookTime),
       const DeepCollectionEquality().hash(kcal),
@@ -337,7 +337,7 @@ abstract class _Recipe extends Recipe {
   const factory _Recipe(
       {required String? id,
       String? userId,
-      required String categoryId,
+      required List<String> categoryIds,
       required String title,
       required int cookTime,
       required int kcal,
@@ -354,7 +354,7 @@ abstract class _Recipe extends Recipe {
   @override
   String? get userId;
   @override
-  String get categoryId;
+  List<String> get categoryIds;
   @override
   String get title;
   @override

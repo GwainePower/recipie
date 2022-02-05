@@ -9,7 +9,9 @@ part of 'recipe.dart';
 _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
       id: json['id'] as String?,
       userId: json['userId'] as String?,
-      categoryId: json['categoryId'] as String,
+      categoryIds: (json['categoryIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       title: json['title'] as String,
       cookTime: json['cookTime'] as int,
       kcal: json['kcal'] as int,
@@ -24,7 +26,7 @@ _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
 Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
-      'categoryId': instance.categoryId,
+      'categoryIds': instance.categoryIds,
       'title': instance.title,
       'cookTime': instance.cookTime,
       'kcal': instance.kcal,

@@ -9,7 +9,7 @@ class Recipe with _$Recipe {
   const factory Recipe({
     required String? id,
     String? userId,
-    required String categoryId,
+    required List<String> categoryIds,
     required String title,
     required int cookTime,
     required int kcal,

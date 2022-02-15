@@ -39,4 +39,14 @@ class RecipeIngredient {
 
   factory RecipeIngredient.fromJson(String source) =>
       RecipeIngredient.fromMap(json.decode(source));
+
+  RecipeIngredient copyWith({
+    String? ingrType,
+    String? quantity,
+  }) {
+    return RecipeIngredient(
+      ingrType: ingrType ?? this.ingrType,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

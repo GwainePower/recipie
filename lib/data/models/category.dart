@@ -3,12 +3,12 @@ import 'dart:convert';
 class Category {
   final String objectId;
   final String title;
-  final String iconUrl;
+  final String image;
 
   Category({
     required this.objectId,
     required this.title,
-    required this.iconUrl,
+    required this.image,
   });
 
   @override
@@ -18,29 +18,19 @@ class Category {
     return other is Category &&
         other.objectId == objectId &&
         other.title == title &&
-        other.iconUrl == iconUrl;
+        other.image == image;
   }
 
   @override
-  int get hashCode => objectId.hashCode ^ title.hashCode ^ iconUrl.hashCode;
-
-  Map<String, dynamic> toMap() {
-    return {
-      'objectId': objectId,
-      'title': title,
-      'iconUrl': iconUrl,
-    };
-  }
+  int get hashCode => objectId.hashCode ^ title.hashCode ^ image.hashCode;
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
       objectId: map['objectId'] ?? '',
       title: map['title'] ?? '',
-      iconUrl: map['iconUrl'] ?? '',
+      image: map['image'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   factory Category.fromJson(String source) =>
       Category.fromMap(json.decode(source));

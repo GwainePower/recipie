@@ -66,7 +66,7 @@ class MainDrawer extends StatelessWidget {
             Icons.fastfood_rounded,
             categoriesMenuName,
             () {
-              // Navigator.of(context).pushReplacementNamed('/');
+              Navigator.of(context).pushNamed(categoriesScreenRoute);
             },
           ),
           const Divider(),

@@ -26,3 +26,6 @@ const String accountMenuName = 'Учётная запись';
 const String categoriesMenuName = 'Категории';
 const String yourRecipesMenuName = 'Ваши рецепты';
 const String settingsMenuName = 'Настройки';
+
+// Прочее
+const String whatInFridgeString = 'Что у вас есть в холодильнике?';

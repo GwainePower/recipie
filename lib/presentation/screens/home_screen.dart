@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../constants/strings.dart';
 
+import '../../data/api_repository.dart';
+
 import '../widgets/main_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,6 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ApiRepository apiRepository = ApiRepository();
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -39,9 +42,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () => apiRepository.getCategories(),
               child: const Text(
-                'Что у вас есть в холодильнике?',
+                whatInFridgeString,
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: montserratFont,

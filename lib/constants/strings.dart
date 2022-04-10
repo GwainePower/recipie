@@ -5,11 +5,6 @@ const String montserratFont = 'Montserrat';
 // Названия
 const String appTitle = 'Recipie';
 
-// Пути
-const String categoriesScreenRoute = '/categories';
-const String recipesListScreenRoute = '/recipes-list';
-const String recipeDetailsScreenRoute = '/recipe-details';
-
 // Картинки
 const String fridgeImage = 'assets/images/fridge.png';
 const String splashImage = 'assets/images/splash.png';

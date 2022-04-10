@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipie/ui/navigation/main_navigation.dart';
 
 import '../../constants/strings.dart';
 
@@ -65,9 +66,7 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             Icons.fastfood_rounded,
             categoriesMenuName,
-            () {
-              Navigator.of(context).pushNamed(categoriesScreenRoute);
-            },
+            () => Navigator.of(context).pushNamed(RouteNames.categoriesScreen),
           ),
           const Divider(),
           buildListTile(

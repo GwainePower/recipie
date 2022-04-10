@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../constants/strings.dart';
 
-import '../screens/categories_screen.dart';
-import '../screens/home_screen.dart';
+import '../navigation/main_navigation.dart';
 
 class MyApp extends StatelessWidget {
+  static final _mainNavigation = MainNavigation();
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -30,12 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: const TextTheme(),
       ),
-      home: const HomeScreen(),
-      initialRoute: '/',
-      routes: {
-        categoriesScreenRoute: (ctx) => const CategoriesScreen(),
-        // recipesListRoute: (ctx) => const RecipesListScreen(),
-      },
+      initialRoute: RouteNames.homeScreen,
+      routes: _mainNavigation.routes,
+      onGenerateRoute: _mainNavigation.onGenerateRoute,
     );
   }
 }

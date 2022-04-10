@@ -14,21 +14,22 @@ class MyApp extends StatelessWidget {
       title: appTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          fontFamily: montserratFont,
-          primarySwatch: Colors.orange,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: montserratFont,
-              fontSize: 24,
-            ),
-            color: Color(0x00ffffff),
-            iconTheme: IconThemeData(color: Colors.black87),
-            actionsIconTheme: IconThemeData(color: Colors.black87),
-            elevation: 0,
+        fontFamily: montserratFont,
+        primarySwatch: Colors.orange,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: montserratFont,
+            fontSize: 24,
           ),
-          textTheme: const TextTheme()),
+          color: Color(0x00ffffff),
+          iconTheme: IconThemeData(color: Colors.black87),
+          actionsIconTheme: IconThemeData(color: Colors.black87),
+          elevation: 0,
+        ),
+        textTheme: const TextTheme(),
+      ),
       home: const HomeScreen(),
       initialRoute: '/',
       routes: {

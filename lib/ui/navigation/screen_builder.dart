@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipie/providers/categories_provider.dart';
 
 import '../screens/account_screen.dart';
 import '../screens/categories_screen.dart';
@@ -12,7 +14,9 @@ class ScreenBuilder {
   }
 
   Widget buildCategoriesScreen() {
-    return const CategoriesScreen();
+    return ChangeNotifierProvider(
+        create: (context) => CategoriesProvider(),
+        child: const CategoriesScreen());
   }
 
   Widget buildMealRecipesListScreen(String categoryId) {

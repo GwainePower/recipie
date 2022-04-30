@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipie/providers/categories_provider.dart';
 
 import '../../constants/strings.dart';
-import '../../constants/dummy_models.dart';
-
-import '../../data/models/category.dart';
 
 import '../widgets/categories_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 
+  Future<void> _refreshCategories(BuildContext context) async =>
+      await Provider.of<CategoriesProvider>(context, listen: false)
+          .fetchCategories();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: ДОБАВИТЬ БИЗНЕС-ЛОГИКУ
-    final List<Category> categories = [];
-    for (var categoryItem in dummyCategory) {
-      categories.add(
-        Category(
-          objectId: categoryItem['objectId']!,
-          title: categoryItem['title']!,
-          image: categoryItem['image']!,
-        ),
-      );
-    }
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
@@ -30,19 +22,54 @@ class CategoriesScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Text(categoriesMenuName),
       ),
-      body: Center(
-        child: GridView.builder(
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-          ),
-          itemCount: categories.length,
-          itemBuilder: (context, index) => CategoriesGridItem(
-            category: categories[index],
-            textColor: Colors.white,
-          ),
-        ),
-      ),
+      body: FutureBuilder(
+          future: _refreshCategories(context),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              );
+            } else {
+              if (snapshot.error != null) {
+                return Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 400,
+                    child: Column(
+                      children: <Widget>[
+                        const Text(
+                          'Упс:',
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          snapshot.error.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return Center(
+                  child: Consumer<CategoriesProvider>(
+                    builder: (_, categoriesData, __) => GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemCount: categoriesData.items.length,
+                      itemBuilder: (context, index) => CategoriesGridItem(
+                        category: categoriesData.items[index],
+                        textColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }
+          }),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-class ApiRepository {
+import '../models/Errors/parse_exception.dart';
+
+class CategoriesRepo {
   Future<List<ParseObject>> getCategories() async {
     QueryBuilder<ParseObject> queryCategory =
         QueryBuilder<ParseObject>(ParseObject('Category'));
@@ -10,8 +12,9 @@ class ApiRepository {
       print(response.results.toString());
       return response.results as List<ParseObject>;
     } else {
-      print('Ничего :(');
-      return [];
+      print('Не удалось загрузить список категорий');
+      throw ParseException(
+          'Не удалось загрузить список категорий, код ошибки ${response.statusCode}');
     }
   }
 }

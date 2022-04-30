@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class Category {
   final String objectId;
@@ -24,6 +24,10 @@ class Category {
   @override
   int get hashCode => objectId.hashCode ^ title.hashCode ^ image.hashCode;
 
+  @override
+  String toString() =>
+      'Category(objectId: $objectId, title: $title, image: $image)';
+
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
       objectId: map['objectId'] ?? '',
@@ -32,6 +36,10 @@ class Category {
     );
   }
 
-  factory Category.fromJson(String source) =>
-      Category.fromMap(json.decode(source));
+  factory Category.fromParseObject(ParseObject parseObject) {
+    return Category(
+        objectId: parseObject.get<String>('objectId') ?? '',
+        title: parseObject.get<String>('title') ?? '',
+        image: parseObject.get('image').url ?? '');
+  }
 }

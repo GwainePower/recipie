@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../constants/strings.dart';
 
-import '../../data/api_repository.dart';
-
 import '../widgets/main_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,7 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiRepository apiRepository = ApiRepository();
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -28,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const Divider(),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: screenSize.height * 0.05,
             ),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
@@ -42,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () => apiRepository.getCategories(),
+              onPressed: () {},
               child: const Text(
                 whatInFridgeString,
                 style: TextStyle(
@@ -52,7 +50,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: screenSize.height * 0.15,
             ),
             Image.asset(
               fridgeImage,

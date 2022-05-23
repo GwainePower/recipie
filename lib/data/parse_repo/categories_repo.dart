@@ -9,7 +9,6 @@ class CategoriesRepo {
     final ParseResponse response = await queryCategory.query();
 
     if (response.success && response.results != null) {
-      print(response.results.toString());
       return response.results as List<ParseObject>;
     } else {
       print('Не удалось загрузить список категорий');

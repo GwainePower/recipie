@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipie/providers/categories_provider.dart';
+
+import '../../providers/categories_provider.dart';
 
 import '../../constants/strings.dart';
 
@@ -10,8 +11,7 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 
   Future<void> _refreshCategories(BuildContext context) async =>
-      await Provider.of<CategoriesProvider>(context, listen: false)
-          .fetchCategories();
+      await context.read<CategoriesProvider>().fetchCategories();
 
   @override
   Widget build(BuildContext context) {

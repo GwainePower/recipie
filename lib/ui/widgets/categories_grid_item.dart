@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:recipie/data/models/category.dart';
+import 'package:recipie/ui/navigation/main_navigation.dart';
 
 class CategoriesGridItem extends StatelessWidget {
   final Category category;
@@ -15,7 +16,10 @@ class CategoriesGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('Нажали ${category.title}'),
+      onTap: () => Navigator.of(context).pushNamed(
+        RouteNames.recipesListScreen,
+        arguments: category.objectId,
+      ),
       child: Container(
         margin: const EdgeInsets.all(4),
         padding: const EdgeInsets.all(16),

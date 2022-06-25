@@ -17,7 +17,7 @@ class AuthScreen extends StatelessWidget {
               width: deviceSize.width,
               height: deviceSize.height,
               child: Image.asset(
-                splashImage,
+                Strings.splashImage,
                 fit: BoxFit.cover,
                 color: const Color.fromRGBO(255, 127, 80, 0.6),
                 colorBlendMode: BlendMode.multiply,
@@ -40,10 +40,10 @@ class AuthScreen extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 20),
                       child: const Text(
-                        appTitle,
+                        Strings.appTitle,
                         style: TextStyle(
                             color: Colors.white,
-                            fontFamily: yesteryearFont,
+                            fontFamily: Strings.yesteryearFont,
                             fontSize: 80),
                       ),
                     ),
@@ -68,9 +68,9 @@ class AuthScreen extends StatelessWidget {
                                 TextFormField(
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: const InputDecoration(
-                                    label: Text(emailAuthString),
-                                    labelStyle:
-                                        TextStyle(fontFamily: montserratFont),
+                                    label: Text(Strings.emailAuthString),
+                                    labelStyle: TextStyle(
+                                        fontFamily: Strings.montserratFont),
                                   ),
                                 ),
                                 TextFormField(
@@ -78,9 +78,9 @@ class AuthScreen extends StatelessWidget {
                                   obscuringCharacter: '⬤',
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: const InputDecoration(
-                                    label: Text(passAuthString),
-                                    labelStyle:
-                                        TextStyle(fontFamily: montserratFont),
+                                    label: Text(Strings.passAuthString),
+                                    labelStyle: TextStyle(
+                                        fontFamily: Strings.montserratFont),
                                   ),
                                 ),
                                 TextFormField(
@@ -88,9 +88,9 @@ class AuthScreen extends StatelessWidget {
                                   obscuringCharacter: '⬤',
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: const InputDecoration(
-                                    label: Text(repeatPassAuthString),
-                                    labelStyle:
-                                        TextStyle(fontFamily: montserratFont),
+                                    label: Text(Strings.repeatPassAuthString),
+                                    labelStyle: TextStyle(
+                                        fontFamily: Strings.montserratFont),
                                   ),
                                 ),
                                 const SizedBox(
@@ -98,10 +98,10 @@ class AuthScreen extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   child: const Text(
-                                    signUpAuthString,
+                                    Strings.signUpAuthString,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: montserratFont,
+                                      fontFamily: Strings.montserratFont,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -115,9 +115,9 @@ class AuthScreen extends StatelessWidget {
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text(
-                                    loginAuthString,
+                                    Strings.loginAuthString,
                                     style: TextStyle(
-                                      fontFamily: montserratFont,
+                                      fontFamily: Strings.montserratFont,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

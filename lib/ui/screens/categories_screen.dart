@@ -5,6 +5,7 @@ import '../../providers/categories_provider.dart';
 
 import '../../constants/strings.dart';
 
+import '../widgets/loading_widget.dart';
 import '../widgets/categories_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -20,16 +21,14 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconTheme.of(context).copyWith(color: Colors.white),
         foregroundColor: Colors.white,
-        title: const Text(categoriesMenuName),
+        title: const Text(Strings.categoriesMenuName),
       ),
       body: FutureBuilder(
           future: _refreshCategories(context),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
+              return const LoadingWidget(
+                indicatorColor: Colors.white,
               );
             } else {
               if (snapshot.error != null) {

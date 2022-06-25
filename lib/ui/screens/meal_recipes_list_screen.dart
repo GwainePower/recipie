@@ -11,7 +11,7 @@ class MealRecipesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Рецепты'),
+        title: const Text('Рецепты'),
         actions: [
           IconButton(
             onPressed: () {},

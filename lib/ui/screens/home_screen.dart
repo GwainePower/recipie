@@ -42,10 +42,10 @@ class HomeScreen extends StatelessWidget {
               ),
               onPressed: () {},
               child: const Text(
-                whatInFridgeString,
+                Strings.whatInFridgeString,
                 style: TextStyle(
                     fontSize: 15,
-                    fontFamily: montserratFont,
+                    fontFamily: Strings.montserratFont,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               height: screenSize.height * 0.15,
             ),
             Image.asset(
-              fridgeImage,
+              Strings.fridgeImage,
               scale: 0.8,
               filterQuality: FilterQuality.high,
             ),

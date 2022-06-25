@@ -15,7 +15,7 @@ class MainDrawer extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          fontFamily: montserratFont,
+          fontFamily: Strings.montserratFont,
           fontSize: 24,
         ),
       ),
@@ -45,9 +45,9 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             child: const Text(
-              appTitle,
+              Strings.appTitle,
               style: TextStyle(
-                fontFamily: yesteryearFont,
+                fontFamily: Strings.yesteryearFont,
                 fontSize: 52,
                 color: Colors.white,
               ),
@@ -59,25 +59,25 @@ class MainDrawer extends StatelessWidget {
           const Divider(),
           buildListTile(
             Icons.account_box_rounded,
-            accountMenuName,
+            Strings.accountMenuName,
             () {},
           ),
           const Divider(),
           buildListTile(
             Icons.fastfood_rounded,
-            categoriesMenuName,
+            Strings.categoriesMenuName,
             () => Navigator.of(context).pushNamed(RouteNames.categoriesScreen),
           ),
           const Divider(),
           buildListTile(
             Icons.receipt_long_rounded,
-            yourRecipesMenuName,
+            Strings.yourRecipesMenuName,
             () {},
           ),
           const Divider(),
           buildListTile(
             Icons.settings,
-            settingsMenuName,
+            Strings.settingsMenuName,
             () {},
           ),
           // const Divider(),

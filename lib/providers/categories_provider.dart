@@ -1,27 +1,22 @@
-import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:recipie/data/models/category.dart';
-import 'package:recipie/data/parse_repo/categories_repo.dart';
+// Какое то безумие с глобальными переменными, но вроде я понял
 
-import '../data/models/Errors/parse_exception.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CategoriesProvider with ChangeNotifier {
-  final categoriesRepo = CategoriesRepo();
-  List<Category> _categories = [];
-  List<Category> get items => [..._categories];
+import '../data/models/category.dart';
+import '../data/parse_repo/categories_repo.dart';
 
-  Future<void> fetchCategories() async {
-    List<Category> parsedCategories = [];
+final _repositoryProvider = Provider<CategoriesRepo>(
+  (ref) => CategoriesRepo(),
+);
 
-    try {
-      var unparsedCategories = await categoriesRepo.getCategories();
-      for (var parsedCategory in unparsedCategories) {
-        parsedCategories.add(Category.fromParseObject(parsedCategory));
-      }
-      print(parsedCategories.toString());
-      _categories = parsedCategories;
-    } on ParseException catch (e) {
-      print(e);
-      throw ParseException(e.toString());
+final categoryProvider = FutureProvider.autoDispose<List<Category>>(
+  (ref) async {
+    final repo = ref.watch(_repositoryProvider);
+    List<Category> result = [];
+    final unparsedCategories = await repo.getCategories();
+    for (var category in unparsedCategories) {
+      result.add(Category.fromParseObject(category));
     }
-  }
-}
+    return result;
+  },
+);

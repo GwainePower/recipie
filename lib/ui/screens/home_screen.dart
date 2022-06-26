@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               ),
               onPressed: () {},
               child: const Text(
-                Strings.whatInFridgeString,
+                Strings.whatInFridge,
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: Strings.montserratFont,

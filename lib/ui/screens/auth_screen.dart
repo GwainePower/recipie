@@ -68,7 +68,7 @@ class AuthScreen extends StatelessWidget {
                                 TextFormField(
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: const InputDecoration(
-                                    label: Text(Strings.emailAuthString),
+                                    label: Text(Strings.emailAuth),
                                     labelStyle: TextStyle(
                                         fontFamily: Strings.montserratFont),
                                   ),
@@ -78,7 +78,7 @@ class AuthScreen extends StatelessWidget {
                                   obscuringCharacter: '⬤',
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: const InputDecoration(
-                                    label: Text(Strings.passAuthString),
+                                    label: Text(Strings.passAuth),
                                     labelStyle: TextStyle(
                                         fontFamily: Strings.montserratFont),
                                   ),
@@ -88,7 +88,7 @@ class AuthScreen extends StatelessWidget {
                                   obscuringCharacter: '⬤',
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: const InputDecoration(
-                                    label: Text(Strings.repeatPassAuthString),
+                                    label: Text(Strings.repeatPassAuth),
                                     labelStyle: TextStyle(
                                         fontFamily: Strings.montserratFont),
                                   ),
@@ -98,7 +98,7 @@ class AuthScreen extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   child: const Text(
-                                    Strings.signUpAuthString,
+                                    Strings.signUpAuth,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: Strings.montserratFont,
@@ -115,7 +115,7 @@ class AuthScreen extends StatelessWidget {
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text(
-                                    Strings.loginAuthString,
+                                    Strings.loginAuth,
                                     style: TextStyle(
                                       fontFamily: Strings.montserratFont,
                                       fontWeight: FontWeight.bold,

@@ -11,11 +11,11 @@ class Strings {
   static const String splashImage = 'assets/images/splash.png';
 
 // Наименования авторизации
-  static const String emailAuthString = 'Адрес эл. почты';
-  static const String passAuthString = 'Пароль';
-  static const String repeatPassAuthString = 'Повторите пароль';
-  static const String signUpAuthString = 'Зарегистрироваться';
-  static const String loginAuthString = 'Войти';
+  static const String emailAuth = 'Адрес эл. почты';
+  static const String passAuth = 'Пароль';
+  static const String repeatPassAuth = 'Повторите пароль';
+  static const String signUpAuth = 'Зарегистрироваться';
+  static const String loginAuth = 'Войти';
 
 // Наименования меню
   static const String accountMenuName = 'Учётная запись';
@@ -24,5 +24,6 @@ class Strings {
   static const String settingsMenuName = 'Настройки';
 
 // Прочее
-  static const String whatInFridgeString = 'Что у вас есть в холодильнике?';
+  static const String whatInFridge = 'Что у вас есть в холодильнике?';
+  static const String somethingWentWrong = 'Что-то пошло не так:';
 }

@@ -5,7 +5,7 @@ import '../data/parse_repo/recipes_repo.dart';
 
 final _repositoryProvider = Provider<RecipesRepo>((ref) => RecipesRepo());
 
-final recipesFetcherProvider = FutureProvider.family<List<Recipe>, String>(
+final _recipesFetcherProvider = FutureProvider.family<List<Recipe>, String>(
   (ref, categoryId) async {
     final repo = ref.watch(_repositoryProvider);
     List<Recipe> result = [];
@@ -31,7 +31,8 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
   }
 
   Future<void> fetchRecipes(List<Recipe> recipes) async {
-    state = [...state, ...recipes];
+    // TODO: подключить парсинг рецептов с сервера
+    state = [...recipes];
   }
 
   void removeRecipe(String recipeId) {

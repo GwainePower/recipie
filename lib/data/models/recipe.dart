@@ -143,5 +143,6 @@ class Recipe {
         steps: parseObject.get<List<String>>('steps') ?? [],
         pictureUrl: parseObject.get('pictureUrl'),
         tags: parseObject.get<List<Tag>>('tags') ?? []);
+    // TODO: Разобраться с парсингом ингредиентов, тегов т.к. на парсе это просто наборы строк
   }
 }

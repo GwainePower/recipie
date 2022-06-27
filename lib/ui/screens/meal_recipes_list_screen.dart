@@ -4,14 +4,14 @@ class MealRecipesListScreen extends StatelessWidget {
   final String categoryId;
   const MealRecipesListScreen({
     Key? key,
-    required this.categoryId,
+    this.categoryId = '',
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Рецепты'),
+        title: Text(categoryId == '' ? 'Рецепты' : 'Рецепты: $categoryId'),
         actions: [
           IconButton(
             onPressed: () {},

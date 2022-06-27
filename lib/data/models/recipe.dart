@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:recipie/data/models/tag.dart';
 
 import 'recipe_ingredient.dart';
 
+@immutable
 class Recipe {
   final String? objectId;
   final String? userId;
@@ -14,10 +17,10 @@ class Recipe {
   final List<RecipeIngredient> ingredients;
   final List<String> steps;
   final String pictureUrl;
-  final List<String> tags;
-  bool isFavorite;
+  final List<Tag> tags;
+  final bool isFavorite;
 
-  Recipe({
+  const Recipe({
     this.objectId,
     this.userId,
     required this.categoryIds,
@@ -41,7 +44,7 @@ class Recipe {
     List<RecipeIngredient>? ingredients,
     List<String>? steps,
     String? pictureUrl,
-    List<String>? tags,
+    List<Tag>? tags,
     bool? isFavorite,
   }) {
     return Recipe(
@@ -120,7 +123,7 @@ class Recipe {
           map['ingredients']?.map((x) => RecipeIngredient.fromMap(x))),
       steps: List<String>.from(map['steps']),
       pictureUrl: map['pictureUrl'] ?? '',
-      tags: List<String>.from(map['tags']),
+      tags: List<Tag>.from(map['tags']),
       isFavorite: map['isFavorite'] ?? false,
     );
   }
@@ -128,4 +131,17 @@ class Recipe {
   String toJson() => json.encode(toMap());
 
   factory Recipe.fromJson(String source) => Recipe.fromMap(json.decode(source));
+
+  factory Recipe.fromParseObject(ParseObject parseObject) {
+    return Recipe(
+        categoryIds: parseObject.get<List<String>>('categoryIds') ?? [],
+        title: parseObject.get<String>('title') ?? '',
+        cookTime: parseObject.get<int>('cookTime') ?? 0,
+        kcal: parseObject.get<int>('kcal') ?? 0,
+        ingredients:
+            parseObject.get<List<RecipeIngredient>>('ingredients') ?? [],
+        steps: parseObject.get<List<String>>('steps') ?? [],
+        pictureUrl: parseObject.get('pictureUrl'),
+        tags: parseObject.get<List<Tag>>('tags') ?? []);
+  }
 }

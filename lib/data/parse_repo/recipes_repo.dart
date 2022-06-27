@@ -1,8 +1,24 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import '../models/API/parse_repo_model.dart';
 
 import '../models/Errors/parse_exception.dart';
 
-class RecipesRepo {
+class RecipesRepo extends ParseRepoModel {
+  @override
+  Future<List<ParseObject>> getData() async {
+    QueryBuilder<ParseObject> queryCategory =
+        QueryBuilder<ParseObject>(ParseObject('Recipe'));
+    final ParseResponse response = await queryCategory.query();
+
+    if (response.success && response.results != null) {
+      return response.results as List<ParseObject>;
+    } else {
+      print('Не удалось загрузить список рецептов');
+      throw ParseException(
+          'Не удалось загрузить список рецептов, код ошибки ${response.statusCode}');
+    }
+  }
+
   Future<List<ParseObject>> getRecipesByCategory(String categoryId) async {
     final QueryBuilder<ParseObject> recipeByCategoryQuery =
         QueryBuilder<ParseObject>(ParseObject('Recipe'));

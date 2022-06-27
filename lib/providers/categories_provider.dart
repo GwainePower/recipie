@@ -13,7 +13,7 @@ final categoryProvider = FutureProvider.autoDispose<List<Category>>(
   (ref) async {
     final repo = ref.watch(_repositoryProvider);
     List<Category> result = [];
-    final unparsedCategories = await repo.getCategories();
+    final unparsedCategories = await repo.getData();
     for (var category in unparsedCategories) {
       result.add(Category.fromParseObject(category));
     }

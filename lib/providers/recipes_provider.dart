@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/recipe.dart';
 import '../data/parse_repo/recipes_repo.dart';
 
-final _repositoryProvider = Provider<RecipesRepo>((ref) => RecipesRepo());
+final _repositoryProvider = Provider<RecipesRepo>(
+  (ref) => RecipesRepo(),
+);
 
 final _recipesFetcherProvider = FutureProvider.family<List<Recipe>, String>(
   (ref, categoryId) async {
@@ -30,7 +32,7 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
     // TODO: добавить импорт добавленного рецепта на сервер
   }
 
-  Future<void> fetchRecipes(List<Recipe> recipes) async {
+  Future<void> addRecipes(List<Recipe> recipes) async {
     // TODO: подключить парсинг рецептов с сервера
     state = [...recipes];
   }
@@ -46,12 +48,15 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
   void removeAllRecipes() => state = [];
 
   void toggleFavorite(String recipeId) {
-    for (final recipe in state) {
-      if (recipe.objectId == recipeId) {
-        recipe.copyWith(isFavorite: !recipe.isFavorite);
-      } else {
-        recipe;
-      }
-    }
+    final changeIndex =
+        state.indexWhere((recipe) => recipe.objectId == recipeId);
+    state[changeIndex].copyWith(isFavorite: !state[changeIndex].isFavorite);
+    // for (final recipe in state) {
+    //   if (recipe.objectId == recipeId) {
+    //     recipe.copyWith(isFavorite: !recipe.isFavorite);
+    //   } else {
+    //     recipe;
+    //   }
+    // }
   }
 }

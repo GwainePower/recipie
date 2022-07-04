@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:recipie/data/models/tag.dart';
 
 import 'recipe_ingredient.dart';
 
-@immutable
 class Recipe {
   final String? objectId;
   final String? userId;
@@ -17,7 +13,7 @@ class Recipe {
   final List<RecipeIngredient> ingredients;
   final List<String> steps;
   final String pictureUrl;
-  final List<Tag> tags;
+  final List<String> tags;
   final bool isFavorite;
 
   const Recipe({
@@ -44,7 +40,7 @@ class Recipe {
     List<RecipeIngredient>? ingredients,
     List<String>? steps,
     String? pictureUrl,
-    List<Tag>? tags,
+    List<String>? tags,
     bool? isFavorite,
   }) {
     return Recipe(
@@ -95,54 +91,20 @@ class Recipe {
         isFavorite.hashCode;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'objectId': objectId,
-      'userId': userId,
-      'categoryIds': categoryIds,
-      'title': title,
-      'cookTime': cookTime,
-      'kcal': kcal,
-      'ingredients': ingredients.map((x) => x.toMap()).toList(),
-      'steps': steps,
-      'pictureUrl': pictureUrl,
-      'tags': tags,
-      'isFavorite': isFavorite,
-    };
-  }
-
-  factory Recipe.fromMap(Map<String, dynamic> map) {
-    return Recipe(
-      objectId: map['objectId'],
-      userId: map['userId'],
-      categoryIds: List<String>.from(map['categoryIds']),
-      title: map['title'] ?? '',
-      cookTime: map['cookTime']?.toInt() ?? 0,
-      kcal: map['kcal']?.toInt() ?? 0,
-      ingredients: List<RecipeIngredient>.from(
-          map['ingredients']?.map((x) => RecipeIngredient.fromMap(x))),
-      steps: List<String>.from(map['steps']),
-      pictureUrl: map['pictureUrl'] ?? '',
-      tags: List<Tag>.from(map['tags']),
-      isFavorite: map['isFavorite'] ?? false,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Recipe.fromJson(String source) => Recipe.fromMap(json.decode(source));
-
   factory Recipe.fromParseObject(ParseObject parseObject) {
     return Recipe(
-        categoryIds: parseObject.get<List<String>>('categoryIds') ?? [],
-        title: parseObject.get<String>('title') ?? '',
-        cookTime: parseObject.get<int>('cookTime') ?? 0,
-        kcal: parseObject.get<int>('kcal') ?? 0,
-        ingredients:
-            parseObject.get<List<RecipeIngredient>>('ingredients') ?? [],
-        steps: parseObject.get<List<String>>('steps') ?? [],
-        pictureUrl: parseObject.get('pictureUrl'),
-        tags: parseObject.get<List<Tag>>('tags') ?? []);
+      categoryIds: parseObject.get<List<String>>('categoryIds') ?? [],
+      title: parseObject.get<String>('title') ?? '',
+      cookTime: parseObject.get<int>('cookTime') ?? 0,
+      kcal: parseObject.get<int>('kcal') ?? 0,
+      ingredients: List<RecipeIngredient>.from(parseObject
+          .get<List<Map<String, dynamic>>>('ingredients')!
+          .map((e) => RecipeIngredient.fromMap(e))),
+      steps: parseObject.get<List<String>>('steps') ?? [],
+      pictureUrl: parseObject.get('pictureUrl'),
+      tags: parseObject.get<List<String>>('tags') ?? [],
+    );
     // TODO: Разобраться с парсингом ингредиентов, тегов т.к. на парсе это просто наборы строк
+    // TODO: Тэги надо вначале кешировать, так как в рецепте они только айдишками идут. Нужен метод
   }
 }

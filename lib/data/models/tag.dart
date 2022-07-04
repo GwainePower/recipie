@@ -1,10 +1,10 @@
-import 'dart:convert';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class Tag {
   final String objectId;
   final String name;
 
-  Tag({
+  const Tag({
     required this.objectId,
     required this.name,
   });
@@ -32,21 +32,10 @@ class Tag {
   @override
   int get hashCode => objectId.hashCode ^ name.hashCode;
 
-  Map<String, dynamic> toMap() {
-    return {
-      'objectId': objectId,
-      'Name': name,
-    };
-  }
-
-  factory Tag.fromMap(Map<String, dynamic> map) {
+  factory Tag.fromParseObject(ParseObject parseObject) {
     return Tag(
-      objectId: map['objectId'] ?? '',
-      name: map['name'] ?? '',
+      objectId: parseObject.get<String>('objectId') ?? '',
+      name: parseObject.get<String>('name') ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Tag.fromJson(String source) => Tag.fromMap(json.decode(source));
 }

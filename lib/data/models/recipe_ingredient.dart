@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 class RecipeIngredient {
   final String ingrType;
   final String quantity;
@@ -47,6 +49,13 @@ class RecipeIngredient {
     return RecipeIngredient(
       ingrType: ingrType ?? this.ingrType,
       quantity: quantity ?? this.quantity,
+    );
+  }
+
+  factory RecipeIngredient.fromParseObject(ParseObject parseObject) {
+    return RecipeIngredient(
+      ingrType: parseObject.get<String>('ingrType') ?? '',
+      quantity: parseObject.get<String>('quantity') ?? '',
     );
   }
 }

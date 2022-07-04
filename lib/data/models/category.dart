@@ -5,7 +5,7 @@ class Category {
   final String title;
   final String image;
 
-  Category({
+  const Category({
     required this.objectId,
     required this.title,
     required this.image,
@@ -28,18 +28,11 @@ class Category {
   String toString() =>
       'Category(objectId: $objectId, title: $title, image: $image)';
 
-  factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
-      objectId: map['objectId'] ?? '',
-      title: map['title'] ?? '',
-      image: map['image'] ?? '',
-    );
-  }
-
   factory Category.fromParseObject(ParseObject parseObject) {
     return Category(
-        objectId: parseObject.get<String>('objectId') ?? '',
-        title: parseObject.get<String>('title') ?? '',
-        image: parseObject.get('image').url ?? '');
+      objectId: parseObject.get<String>('objectId') ?? '',
+      title: parseObject.get<String>('title') ?? '',
+      image: parseObject.get('image').url ?? '',
+    );
   }
 }

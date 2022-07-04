@@ -13,7 +13,6 @@ class CategoriesGrid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(categoryProvider);
-
     return categories.when(
       data: (data) => Center(
         child: GridView.builder(

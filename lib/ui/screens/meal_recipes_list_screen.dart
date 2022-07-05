@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:recipie/ui/widgets/recipes/recipes_list.dart';
 
 class MealRecipesListScreen extends StatelessWidget {
-  final String categoryId;
   const MealRecipesListScreen({
     Key? key,
-    this.categoryId = '',
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final categoryId = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryId == '' ? 'Рецепты' : 'Рецепты: $categoryId'),
+        title: Text(categoryId == '' ? 'Рецепты' : categoryId),
         actions: [
           IconButton(
             onPressed: () {},
@@ -19,7 +19,7 @@ class MealRecipesListScreen extends StatelessWidget {
           ),
         ],
       ),
-      // body: Column(children: [Text('Рецептов: '), ListView.builder(itemBuilder: (context, index) => ,)]),
+      body: RecipesList(categoryId),
     );
   }
 }

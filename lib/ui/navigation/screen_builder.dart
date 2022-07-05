@@ -15,12 +15,12 @@ class ScreenBuilder {
     return const CategoriesScreen();
   }
 
-  Widget buildMealRecipesListScreen(String categoryId) {
-    return MealRecipesListScreen(categoryId: categoryId);
+  Widget buildMealRecipesListScreen() {
+    return const MealRecipesListScreen();
   }
 
-  Widget buildMealRecipeScreen() {
-    return const MealRecipeScreen();
+  Widget buildMealRecipeScreen(String recipeId) {
+    return MealRecipeScreen(recipeId: recipeId);
   }
 
   Widget buildAccountScreen() {

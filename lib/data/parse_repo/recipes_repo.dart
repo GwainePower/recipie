@@ -27,7 +27,7 @@ class RecipesRepo extends ParseRepoModel {
     final ParseResponse response = await recipeByCategoryQuery.query();
 
     if (response.success && response.results != null) {
-      print(response.results.toString());
+      // print(response.results.toString());
       return response.results as List<ParseObject>;
     } else {
       print('Не удалось загрузить список рецептов');

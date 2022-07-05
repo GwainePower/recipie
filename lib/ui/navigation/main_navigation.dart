@@ -16,16 +16,18 @@ class MainNavigation {
   final routes = <String, Widget Function(BuildContext)>{
     RouteNames.homeScreen: (_) => _screenBuilder.buildHomeScreen(),
     RouteNames.categoriesScreen: (_) => _screenBuilder.buildCategoriesScreen(),
+    RouteNames.recipesListScreen: (_) =>
+        _screenBuilder.buildMealRecipesListScreen(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteNames.recipesListScreen:
+      case RouteNames.recipeDetailsScreen:
         final arguments = settings.arguments;
-        final categoryId = arguments is String ? arguments : '';
+        final recipeId = arguments is String ? arguments : '';
         return MaterialPageRoute(
-            builder: (_) =>
-                _screenBuilder.buildMealRecipesListScreen(categoryId));
+          builder: (_) => _screenBuilder.buildMealRecipeScreen(recipeId),
+        );
       default:
         const widget = Text('Проблемка!!!');
         return MaterialPageRoute(builder: (_) => widget);

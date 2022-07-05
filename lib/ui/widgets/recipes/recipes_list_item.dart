@@ -19,7 +19,7 @@ class RecipesListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Stack(children: [
-        Image.network(recipeItem.pictureUrl),
+        Image.network(recipeItem.picture),
         Text(recipeItem.title),
       ]),
     );

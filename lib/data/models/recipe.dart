@@ -12,7 +12,7 @@ class Recipe {
   final int kcal;
   final List<RecipeIngredient> ingredients;
   final List<String> steps;
-  final String pictureUrl;
+  final String picture;
   final List<String> tags;
   final bool isFavorite;
 
@@ -25,7 +25,7 @@ class Recipe {
     required this.kcal,
     required this.ingredients,
     required this.steps,
-    required this.pictureUrl,
+    required this.picture,
     required this.tags,
     this.isFavorite = false,
   });
@@ -39,7 +39,7 @@ class Recipe {
     int? kcal,
     List<RecipeIngredient>? ingredients,
     List<String>? steps,
-    String? pictureUrl,
+    String? picture,
     List<String>? tags,
     bool? isFavorite,
   }) {
@@ -52,7 +52,7 @@ class Recipe {
       kcal: kcal ?? this.kcal,
       ingredients: ingredients ?? this.ingredients,
       steps: steps ?? this.steps,
-      pictureUrl: pictureUrl ?? this.pictureUrl,
+      picture: picture ?? this.picture,
       tags: tags ?? this.tags,
       isFavorite: isFavorite ?? this.isFavorite,
     );
@@ -71,7 +71,7 @@ class Recipe {
         other.kcal == kcal &&
         listEquals(other.ingredients, ingredients) &&
         listEquals(other.steps, steps) &&
-        other.pictureUrl == pictureUrl &&
+        other.picture == picture &&
         listEquals(other.tags, tags) &&
         other.isFavorite == isFavorite;
   }
@@ -86,25 +86,23 @@ class Recipe {
         kcal.hashCode ^
         ingredients.hashCode ^
         steps.hashCode ^
-        pictureUrl.hashCode ^
+        picture.hashCode ^
         tags.hashCode ^
         isFavorite.hashCode;
   }
 
   factory Recipe.fromParseObject(ParseObject parseObject) {
     return Recipe(
-      categoryIds: parseObject.get<List<String>>('categoryIds') ?? [],
+      categoryIds: List<String>.from(parseObject.get<List>('categoryIds')!),
       title: parseObject.get<String>('title') ?? '',
       cookTime: parseObject.get<int>('cookTime') ?? 0,
       kcal: parseObject.get<int>('kcal') ?? 0,
       ingredients: List<RecipeIngredient>.from(parseObject
-          .get<List<Map<String, dynamic>>>('ingredients')!
+          .get<List>('ingredients')!
           .map((e) => RecipeIngredient.fromMap(e))),
-      steps: parseObject.get<List<String>>('steps') ?? [],
-      pictureUrl: parseObject.get('pictureUrl'),
-      tags: parseObject.get<List<String>>('tags') ?? [],
+      steps: List<String>.from(parseObject.get<List>('steps')!),
+      picture: parseObject.get('picture').url ?? '',
+      tags: List<String>.from(parseObject.get<List>('tags')!),
     );
-    // TODO: Разобраться с парсингом ингредиентов, тегов т.к. на парсе это просто наборы строк
-    // TODO: Тэги надо вначале кешировать, так как в рецепте они только айдишками идут. Нужен метод
   }
 }

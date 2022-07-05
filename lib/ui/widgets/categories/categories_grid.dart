@@ -14,15 +14,15 @@ class CategoriesGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(categoryProvider);
     return categories.when(
-      data: (data) => Center(
+      data: (loadedCategories) => Center(
         child: GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
           ),
-          itemCount: data.length,
+          itemCount: loadedCategories.length,
           itemBuilder: (context, index) => CategoriesGridItem(
-            category: data[index],
+            category: loadedCategories[index],
             textColor: Colors.white,
           ),
         ),

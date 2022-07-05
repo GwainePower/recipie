@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: RouteNames.homeScreen,
       routes: _mainNavigation.routes,
-      onGenerateRoute: _mainNavigation.onGenerateRoute,
+      // onGenerateRoute: _mainNavigation.onGenerateRoute,
     );
   }
 }

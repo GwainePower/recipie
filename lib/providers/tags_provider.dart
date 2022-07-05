@@ -10,9 +10,7 @@ final _repositoryProvider = Provider<TagsRepo>(
 class TagsNotifier extends StateNotifier<List<Tag>> {
   TagsNotifier() : super([]);
 
-  void addTags(List<Tag> tags) {
-    state = [...tags];
-  }
+  void addTags(List<Tag> tags) => state = [...tags];
 
   void clearTagsList() => state = [];
 }

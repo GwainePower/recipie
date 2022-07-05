@@ -3,24 +3,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/recipe.dart';
 import '../data/parse_repo/recipes_repo.dart';
 
-final _repositoryProvider = Provider<RecipesRepo>(
-  (ref) => RecipesRepo(),
-);
+final _recipesRepoProvider = Provider<RecipesRepo>((ref) => RecipesRepo());
 
-final _recipesFetcherProvider = FutureProvider.family<List<Recipe>, String>(
-  (ref, categoryId) async {
-    final repo = ref.watch(_repositoryProvider);
-    List<Recipe> result = [];
-    final unparsedRecipes = await repo.getRecipesByCategory(categoryId);
-    for (var recipe in unparsedRecipes) {
-      result.add(Recipe.fromParseObject(recipe));
+final recipesByCategoryProvider = FutureProvider.family
+    .autoDispose<List<Recipe>, String>((ref, categoryId) async {
+  final recipesRepo = ref.watch(_recipesRepoProvider);
+  final List<Recipe> recipes = [];
+  try {
+    final parseObjects = await recipesRepo.getRecipesByCategory(categoryId);
+    // print('достать получилось, далее');
+    for (var object in parseObjects) {
+      recipes.add(Recipe.fromParseObject(object));
     }
-    return result;
-  },
-);
+    return recipes;
+  } catch (e) {
+    print('При парсинге возникла ошибка - $e');
+    return [];
+  }
+});
 
 class RecipesNotifier extends StateNotifier<List<Recipe>> {
-  RecipesNotifier() : super([]);
+  final RecipesRepo recipesRepo;
+  RecipesNotifier(
+    this.recipesRepo,
+  ) : super([]);
 
   void addRecipe(Recipe recipe) {
     // Для иммутабельных моделей и иммутабельного провайдера мы создаем НОВЫЙ
@@ -32,9 +38,18 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
     // TODO: добавить импорт добавленного рецепта на сервер
   }
 
-  Future<void> addRecipes(List<Recipe> recipes) async {
-    // TODO: подключить парсинг рецептов с сервера
-    state = [...recipes];
+  Future<void> fetchRecipesByCategory(String categoryId) async {
+    final fetchedRecipes = [];
+    try {
+      final parseObjects = await recipesRepo.getRecipesByCategory(categoryId);
+      for (var object in parseObjects) {
+        fetchedRecipes.add(Recipe.fromParseObject(object));
+      }
+      state = [...fetchedRecipes];
+    } catch (e) {
+      print(e.toString());
+      state = [...state];
+    }
   }
 
   void removeRecipe(String recipeId) {

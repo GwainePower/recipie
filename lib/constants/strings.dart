@@ -26,4 +26,5 @@ class Strings {
 // Прочее
   static const String whatInFridge = 'Что у вас есть в холодильнике?';
   static const String somethingWentWrong = 'Что-то пошло не так:';
+  static const String tryToRefresh = 'Попробовать перезагрузить';
 }

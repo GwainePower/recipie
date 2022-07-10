@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipie/ui/widgets/error_centered.dart';
-import 'package:recipie/ui/widgets/loading_widget.dart';
-import 'package:recipie/ui/widgets/recipes/recipes_list_item.dart';
+
+import '../error_centered.dart';
+import '../loading_widget.dart';
+import './recipes_list_item.dart';
 
 import '../../../providers/recipes_provider.dart';
 

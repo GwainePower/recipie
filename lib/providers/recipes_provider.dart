@@ -52,6 +52,9 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
     }
   }
 
+  Recipe findById(String recipeId) =>
+      state.firstWhere((recipe) => recipe.objectId == recipeId);
+
   void removeRecipe(String recipeId) {
     // Снова же,создаем просто НОВЫЙ список, но без того рецепта, который хотим удалить
     state = [

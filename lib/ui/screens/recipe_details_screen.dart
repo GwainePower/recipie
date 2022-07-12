@@ -10,6 +10,12 @@ class MealRecipeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final recipeId = ModalRoute.of(context)!.settings.arguments as String;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(recipeId),
+      ),
+      body: const Text('Recipe details'),
+    );
   }
 }

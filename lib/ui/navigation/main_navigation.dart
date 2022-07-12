@@ -17,20 +17,8 @@ class MainNavigation {
     RouteNames.homeScreen: (_) => _screenBuilder.buildHomeScreen(),
     RouteNames.categoriesScreen: (_) => _screenBuilder.buildCategoriesScreen(),
     RouteNames.recipesListScreen: (_) =>
-        _screenBuilder.buildMealRecipesListScreen(),
+        _screenBuilder.buildRecipesListScreen(),
+    RouteNames.recipeDetailsScreen: (_) =>
+        _screenBuilder.buildRecipeDetailsScreen(),
   };
-
-  Route<Object> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case RouteNames.recipeDetailsScreen:
-        final arguments = settings.arguments;
-        final recipeId = arguments is String ? arguments : '';
-        return MaterialPageRoute(
-          builder: (_) => _screenBuilder.buildMealRecipeScreen(recipeId),
-        );
-      default:
-        const widget = Text('Проблемка!!!');
-        return MaterialPageRoute(builder: (_) => widget);
-    }
-  }
 }

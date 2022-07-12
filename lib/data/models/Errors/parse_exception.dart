@@ -4,7 +4,5 @@ class ParseException implements Exception {
   ParseException(this.message);
 
   @override
-  String toString() {
-    return message;
-  }
+  String toString() => message;
 }

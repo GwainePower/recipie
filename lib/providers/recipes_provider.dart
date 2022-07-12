@@ -22,11 +22,17 @@ final recipesByCategoryProvider = FutureProvider.family
   }
 });
 
+final recipesProvider = StateNotifierProvider<RecipesNotifier, List<Recipe>>(
+  (ref) => RecipesNotifier(RecipesRepo()),
+);
+
 class RecipesNotifier extends StateNotifier<List<Recipe>> {
   final RecipesRepo recipesRepo;
   RecipesNotifier(
     this.recipesRepo,
   ) : super([]);
+
+  bool _isLoading = false;
 
   void addRecipe(Recipe recipe) {
     // Для иммутабельных моделей и иммутабельного провайдера мы создаем НОВЫЙ
@@ -39,7 +45,12 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
   }
 
   Future<void> fetchRecipesByCategory(String categoryId) async {
+    if (_isLoading) return;
+
     final fetchedRecipes = [];
+
+    _isLoading = true;
+
     try {
       final parseObjects = await recipesRepo.getRecipesByCategory(categoryId);
       for (var object in parseObjects) {
@@ -49,6 +60,8 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
     } catch (e) {
       print(e.toString());
       state = [...state];
+    } finally {
+      _isLoading = false;
     }
   }
 

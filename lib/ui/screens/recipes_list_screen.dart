@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipie/ui/widgets/recipes/recipes_list.dart';
 
-class MealRecipesListScreen extends StatelessWidget {
-  const MealRecipesListScreen({
+class RecipesListScreen extends StatelessWidget {
+  const RecipesListScreen({
     Key? key,
   }) : super(key: key);
 

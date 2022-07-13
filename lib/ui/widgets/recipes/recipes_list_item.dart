@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:recipie/data/models/recipe.dart';
+import 'package:recipie/ui/widgets/recipes/iconized_info.dart';
 
 class RecipesListItem extends StatelessWidget {
   final Recipe recipeItem;
@@ -12,13 +13,17 @@ class RecipesListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double imageBorderRadius = 20;
+    const double horizMarginMod = 0.04;
     final screenSize = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: screenSize.height * 0.03,
+        left: screenSize.width * horizMarginMod,
+        right: screenSize.width * horizMarginMod,
+      ),
       child: Stack(
         children: <Widget>[
           Container(
-            width: screenSize.width,
             height: screenSize.height * 0.3,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -45,6 +50,8 @@ class RecipesListItem extends StatelessWidget {
               ),
               child: Text(
                 recipeItem.title,
+                softWrap: true,
+                overflow: TextOverflow.fade,
                 style: const TextStyle(
                   fontSize: 32,
                   color: Colors.white,
@@ -55,7 +62,7 @@ class RecipesListItem extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Container(
-              width: screenSize.width,
+              width: screenSize.width * (1 - horizMarginMod * 2),
               height: screenSize.height * 0.08,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -64,8 +71,35 @@ class RecipesListItem extends StatelessWidget {
                 ),
                 color: Color.fromRGBO(0, 0, 0, 0.5),
               ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  IconizedInfo(
+                    value: recipeItem.cookTime,
+                    infoType: InfoType.time,
+                  ),
+                  IconizedInfo(
+                    value: recipeItem.kcal,
+                    infoType: InfoType.kcal,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // TODO: Добавить функционал "Избранного"
+                    },
+                    icon: recipeItem.isFavorite
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.favorite_outline,
+                            color: Colors.white,
+                          ),
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

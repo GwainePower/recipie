@@ -14,8 +14,9 @@ class CategoriesRepo extends ParseRepoModel {
       return response.results as List<ParseObject>;
     } else {
       print('Не удалось загрузить список категорий');
-      throw ParseException(
-          'Не удалось загрузить список категорий, код ошибки ${response.statusCode}');
+      return [];
+      // throw ParseException(
+      //     'Не удалось загрузить список категорий, код ошибки ${response.statusCode}');
     }
   }
 }

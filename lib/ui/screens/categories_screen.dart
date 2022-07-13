@@ -18,7 +18,8 @@ class CategoriesScreen extends ConsumerWidget {
         title: const Text(Strings.categoriesMenuName),
       ),
       body: RefreshIndicator(
-        onRefresh: () async => ref.refresh(categoryProvider),
+        onRefresh: () =>
+            ref.read(categoriesProvider.notifier).fetchCategories(),
         child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.7,
             width: double.infinity,

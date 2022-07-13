@@ -4,11 +4,11 @@ import '../data/models/Errors/tags_provider_exception.dart';
 import '../data/parse_repo/tags_repo.dart';
 import '../data/models/tag.dart';
 
-final TagsProvider = StateNotifierProvider<TagsNotifier, List<Tag>>(
+final tagsProvider = StateNotifierProvider<TagsNotifier, AsyncValue<List<Tag>>>(
     (ref) => TagsNotifier(TagsRepo()));
 
-class TagsNotifier extends StateNotifier<List<Tag>> {
-  TagsNotifier(this._tagsRepo) : super([]);
+class TagsNotifier extends StateNotifier<AsyncValue<List<Tag>>> {
+  TagsNotifier(this._tagsRepo) : super(const AsyncData([]));
   final TagsRepo _tagsRepo;
 
   bool _isLoading = false;
@@ -24,10 +24,10 @@ class TagsNotifier extends StateNotifier<List<Tag>> {
       for (var object in parseObjects) {
         loadedTags.add(Tag.fromParseObject(object));
       }
-      state = [...loadedTags];
+      state = AsyncData([...loadedTags]);
+      _tagsLoaded = true;
     } on TagsProviderException catch (e) {
       print(e.toString());
-      state = [...state];
       _tagsLoaded = true;
     } finally {
       _isLoading = false;
@@ -40,13 +40,13 @@ class TagsNotifier extends StateNotifier<List<Tag>> {
     }
     final List<Tag> foundTags = [];
     for (String tagId in tagsIds) {
-      foundTags.add(state.firstWhere((tag) => tagId == tag.objectId));
+      foundTags.add(state.value!.firstWhere((tag) => tagId == tag.objectId));
     }
     return foundTags;
   }
 
   void clearTags() {
-    state = [];
+    state = const AsyncData([]);
     _tagsLoaded = false;
   }
 }

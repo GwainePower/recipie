@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/models/Errors/recipes_provider_exception.dart';
 import '../data/models/recipe.dart';
 import '../data/parse_repo/recipes_repo.dart';
 
@@ -57,7 +58,7 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
         fetchedRecipes.add(Recipe.fromParseObject(object));
       }
       state = [...fetchedRecipes];
-    } catch (e) {
+    } on RecipesProviderException catch (e) {
       print(e.toString());
       state = [...state];
     } finally {

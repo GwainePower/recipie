@@ -14,8 +14,9 @@ class TagsRepo extends ParseRepoModel {
       return response.results as List<ParseObject>;
     } else {
       print('Не удалось загрузить список тегов');
-      throw ParseException(
-          'Не удалось загрузить список тегов, код ошибки ${response.statusCode}');
+      return [];
+      // throw ParseException(
+      //     'Не удалось загрузить список тегов, код ошибки ${response.statusCode}');
     }
   }
 }

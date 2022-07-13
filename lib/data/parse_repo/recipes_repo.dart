@@ -31,8 +31,9 @@ class RecipesRepo extends ParseRepoModel {
       return response.results as List<ParseObject>;
     } else {
       print('Не удалось загрузить список рецептов');
-      throw ParseException(
-          'Не удалось загрузить список рецептов, код ошибки ${response.statusCode}');
+      return [];
+      // throw ParseException(
+      //     'Не удалось загрузить список рецептов, код ошибки ${response.statusCode}');
     }
   }
 }

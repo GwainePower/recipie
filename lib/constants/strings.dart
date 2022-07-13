@@ -23,6 +23,9 @@ class Strings {
   static const String yourRecipesMenuName = 'Ваши рецепты';
   static const String settingsMenuName = 'Настройки';
 
+// Наименования страниц
+  static const String recipesScreenName = 'Рецепты';
+
 // Прочее
   static const String whatInFridge = 'Что у вас есть в холодильнике?';
   static const String somethingWentWrong = 'Что-то пошло не так:';

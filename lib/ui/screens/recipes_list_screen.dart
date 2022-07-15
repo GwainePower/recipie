@@ -27,6 +27,10 @@ class RecipesListScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {},
+            icon: const Icon(Icons.sort_rounded),
+          ),
+          IconButton(
+            onPressed: () {},
             icon: const Icon(Icons.search),
           ),
         ],

@@ -11,7 +11,7 @@ final recipesByCategoryProvider = FutureProvider.family
   final recipesRepo = ref.watch(_recipesRepoProvider);
   final List<Recipe> recipes = [];
   try {
-    final parseObjects = await recipesRepo.getRecipesByCategory(categoryId);
+    final parseObjects = await recipesRepo.getData(categoryId);
     // print('достать получилось, далее');
     for (var object in parseObjects) {
       recipes.add(Recipe.fromParseObject(object));
@@ -23,15 +23,18 @@ final recipesByCategoryProvider = FutureProvider.family
   }
 });
 
-final recipesProvider = StateNotifierProvider<RecipesNotifier, List<Recipe>>(
+final selectedRecipeProvider = StateProvider<Recipe?>((ref) => null);
+
+final recipesNotifierProvider =
+    StateNotifierProvider<RecipesNotifier, AsyncValue<List<Recipe>>>(
   (ref) => RecipesNotifier(RecipesRepo()),
 );
 
-class RecipesNotifier extends StateNotifier<List<Recipe>> {
+class RecipesNotifier extends StateNotifier<AsyncValue<List<Recipe>>> {
   final RecipesRepo recipesRepo;
   RecipesNotifier(
     this.recipesRepo,
-  ) : super([]);
+  ) : super(const AsyncValue.loading());
 
   bool _isLoading = false;
 
@@ -39,7 +42,7 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
     // Для иммутабельных моделей и иммутабельного провайдера мы создаем НОВЫЙ
     // список с добавленным объектом к остальным, но не добавляем через add
     // как обычно это делали со списками
-    state = [...state, recipe];
+    // state = [...state, recipe];
     // Нет необходимости вызывать "notifyListeners". Вызывая "state ="
     // провайдер автоматически перерисует интерфейс если понадобится
     // TODO: добавить импорт добавленного рецепта на сервер
@@ -48,41 +51,42 @@ class RecipesNotifier extends StateNotifier<List<Recipe>> {
   Future<void> fetchRecipesByCategory(String categoryId) async {
     if (_isLoading) return;
 
-    final fetchedRecipes = [];
+    final loadedRecipes = [];
 
     _isLoading = true;
 
     try {
-      final parseObjects = await recipesRepo.getRecipesByCategory(categoryId);
+      final parseObjects = await recipesRepo.getData(categoryId);
       for (var object in parseObjects) {
-        fetchedRecipes.add(Recipe.fromParseObject(object));
+        loadedRecipes.add(Recipe.fromParseObject(object));
       }
-      state = [...fetchedRecipes];
+      state = AsyncData([...loadedRecipes]);
     } on RecipesProviderException catch (e) {
       print(e.toString());
-      state = [...state];
+      state = AsyncError(e.toString());
     } finally {
       _isLoading = false;
     }
   }
 
   Recipe findById(String recipeId) =>
-      state.firstWhere((recipe) => recipe.objectId == recipeId);
+      state.value!.firstWhere((recipe) => recipe.objectId == recipeId);
 
   void removeRecipe(String recipeId) {
     // Снова же,создаем просто НОВЫЙ список, но без того рецепта, который хотим удалить
-    state = [
-      for (final recipe in state)
-        if (recipe.objectId != recipeId) recipe,
-    ];
+    // state = [
+    //   for (final recipe in state)
+    //     if (recipe.objectId != recipeId) recipe,
+    // ];
   }
 
-  void removeAllRecipes() => state = [];
+  void removeAllRecipes() => state = const AsyncData([]);
 
   void toggleFavorite(String recipeId) {
     final changeIndex =
-        state.indexWhere((recipe) => recipe.objectId == recipeId);
-    state[changeIndex].copyWith(isFavorite: !state[changeIndex].isFavorite);
+        state.value!.indexWhere((recipe) => recipe.objectId == recipeId);
+    state.value![changeIndex]
+        .copyWith(isFavorite: !state.value![changeIndex].isFavorite);
     // for (final recipe in state) {
     //   if (recipe.objectId == recipeId) {
     //     recipe.copyWith(isFavorite: !recipe.isFavorite);

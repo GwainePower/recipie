@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:recipie/data/models/recipe.dart';
+import 'package:recipie/providers/recipes_provider.dart';
+import 'package:recipie/ui/navigation/main_navigation.dart';
 import 'package:recipie/ui/widgets/recipes/iconized_info.dart';
 
-class RecipesListItem extends StatelessWidget {
+class RecipesListItem extends ConsumerWidget {
   final Recipe recipeItem;
   const RecipesListItem({
     Key? key,
@@ -11,7 +14,7 @@ class RecipesListItem extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const double imageBorderRadius = 20;
     const double horizMarginMod = 0.04;
     final screenSize = MediaQuery.of(context).size;
@@ -23,38 +26,44 @@ class RecipesListItem extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          Container(
-            height: screenSize.height * 0.3,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(recipeItem.picture),
-                fit: BoxFit.cover,
+          InkWell(
+            onTap: () => onTapEvent(ref, context),
+            child: Container(
+              height: screenSize.height * 0.3,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(recipeItem.picture),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(imageBorderRadius),
               ),
-              borderRadius: BorderRadius.circular(imageBorderRadius),
             ),
           ),
           Positioned(
             right: 0,
             top: screenSize.height * 0.05,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 4,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  topLeft: Radius.circular(15),
+            child: InkWell(
+              onTap: () => onTapEvent(ref, context),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
                 ),
-                color: Color.fromRGBO(0, 0, 0, 0.5),
-              ),
-              child: Text(
-                recipeItem.title,
-                softWrap: true,
-                overflow: TextOverflow.fade,
-                style: const TextStyle(
-                  fontSize: 32,
-                  color: Colors.white,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    topLeft: Radius.circular(15),
+                  ),
+                  color: Color.fromRGBO(0, 0, 0, 0.5),
+                ),
+                child: Text(
+                  recipeItem.title,
+                  softWrap: true,
+                  overflow: TextOverflow.fade,
+                  style: const TextStyle(
+                    fontSize: 32,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -103,5 +112,10 @@ class RecipesListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onTapEvent(WidgetRef ref, BuildContext context) {
+    ref.read(selectedRecipeProvider.notifier).state = recipeItem;
+    Navigator.of(context).pushNamed(RouteNames.recipeDetailsScreen);
   }
 }

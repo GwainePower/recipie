@@ -3,9 +3,9 @@ import '../models/API/parse_repo_model.dart';
 
 import '../models/Errors/parse_exception.dart';
 
-class TagsRepo extends ParseRepoModel {
+class TagsRepo implements ParseRepoModel {
   @override
-  Future<List<ParseObject>> getData() async {
+  Future<List<ParseObject>> getData([String? optional]) async {
     QueryBuilder<ParseObject> queryCategory =
         QueryBuilder<ParseObject>(ParseObject('Tags'));
     final ParseResponse response = await queryCategory.query();

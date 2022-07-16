@@ -30,6 +30,8 @@ final recipesNotifierProvider =
   (ref) => RecipesNotifier(RecipesRepo()),
 );
 
+// ? Попробовать в виджетах преобразовывать добавление данных в стейт нотифайер
+// ? как в стейт провайдерах
 class RecipesNotifier extends StateNotifier<AsyncValue<List<Recipe>>> {
   final RecipesRepo recipesRepo;
   RecipesNotifier(

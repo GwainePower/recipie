@@ -30,4 +30,7 @@ class Strings {
   static const String whatInFridge = 'Что у вас есть в холодильнике?';
   static const String somethingWentWrong = 'Что-то пошло не так:';
   static const String tryToRefresh = 'Попробовать перезагрузить';
+  static const String minutes = 'мин.';
+  static const String kcal = 'ккал.';
+  static const String ingredients = 'Ингредиенты';
 }

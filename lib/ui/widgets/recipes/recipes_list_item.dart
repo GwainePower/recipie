@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:recipie/data/models/recipe.dart';
-import 'package:recipie/providers/recipes_provider.dart';
-import 'package:recipie/ui/navigation/main_navigation.dart';
-import 'package:recipie/ui/widgets/recipes/iconized_info.dart';
+import '../../../data/models/recipe.dart';
+import '../../../providers/recipes_provider.dart';
+import '../../navigation/main_navigation.dart';
+import 'favorite_button.dart';
+import 'iconized_info.dart';
 
 class RecipesListItem extends ConsumerWidget {
   final Recipe recipeItem;
@@ -91,20 +92,7 @@ class RecipesListItem extends ConsumerWidget {
                     value: recipeItem.kcal,
                     infoType: InfoType.kcal,
                   ),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: Добавить функционал "Избранного"
-                    },
-                    icon: recipeItem.isFavorite
-                        ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.favorite_outline,
-                            color: Colors.white,
-                          ),
-                  ),
+                  FavoriteButton(isFavorite: recipeItem.isFavorite),
                 ],
               ),
             ),

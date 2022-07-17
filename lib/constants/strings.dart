@@ -33,4 +33,5 @@ class Strings {
   static const String minutes = 'мин.';
   static const String kcal = 'ккал.';
   static const String ingredients = 'Ингредиенты';
+  static const String cookSteps = 'Шаги приготовления';
 }
